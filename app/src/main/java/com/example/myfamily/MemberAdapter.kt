@@ -21,6 +21,9 @@ class MemberAdapter(private val listMembers: List<MemberModel>) : RecyclerView.A
 
         val item = listMembers[position]
         holder.userName.text = item.name
+        holder.address.text = item.address
+        holder.batteryPercentage.text = item.batteryPercentage
+        holder.distance.text = item.distance
 
     }
 
@@ -31,6 +34,9 @@ class MemberAdapter(private val listMembers: List<MemberModel>) : RecyclerView.A
     class ViewHolder(val item : View) : RecyclerView.ViewHolder(item) {
         val imageUser = item.findViewById<ImageView>(R.id.iv_img_user)
         val userName = item.findViewById<TextView>(R.id.tv_user_name)
+        val address = item.findViewById<TextView>(R.id.tv_address)
+        val batteryPercentage = item.findViewById<TextView>(R.id.tv_battery)
+        val distance = item.findViewById<TextView>(R.id.tv_distance)
 
 
     }

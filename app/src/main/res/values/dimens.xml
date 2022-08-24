@@ -10,4 +10,8 @@
     <dimen name="dimen_8">8dp</dimen>
     <dimen name="dimen_4">4dp</dimen>
     <dimen name="dimen_32">32dp</dimen>
+    <dimen name="dimen_145">145dp</dimen>
+    <dimen name="dimen_20">20dp</dimen>
+    <dimen name="dimen_2">2dp</dimen>
+    <dimen name="dimen_6">6dp</dimen>
 </resources>
