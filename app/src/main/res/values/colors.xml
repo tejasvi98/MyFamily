@@ -12,4 +12,5 @@
     <color name="card_red">#f0737b</color>
     <color name="card_cyan">#63d2c8</color>
     <color name="light_green">#00FF91</color>
+    <color name="color_battery_green">#48fc3c</color>
 </resources>

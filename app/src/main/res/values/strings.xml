@@ -11,4 +11,9 @@
     <string name="MyFamily">My Family</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="string_time_sample">16:40</string>
+    <string name="string_address_sample">Karnal Times House, Chaura Bazaar, Opposite Amritdhara Hospital, Karnal, Haryana-132001</string>
+    <string name="string_battery_percentage">90%</string>
+    <string name="string_distance_sample">220M</string>
+    <string name="string_wifi">WiFi</string>
 </resources>
