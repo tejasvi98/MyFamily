@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
                     inflateFragment(HomeFragment())
                 }
                 R.id.itDashboard -> {
-                    inflateFragment(DashboardFragment())
+                    inflateFragment(MapsFragment())
                 }
                 R.id.itProfile -> {
                     inflateFragment(ProfileFragment())
