@@ -46,9 +46,26 @@
         tools:listitem="@layout/item_member"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSecurity"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintBottom_toTopOf="@id/mcv_invite_card"
+        app:layout_constraintTop_toBottomOf="@+id/tvSecurity" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcv_invite_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_16"
+        app:cardCornerRadius="@dimen/dimen_16"
+        app:cardElevation="@dimen/dimen_8"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_invite"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_150"
+            android:layout_marginTop="@dimen/dimen_8"
+            tools:listitem="@layout/item_invite" />
+
+    </com.google.android.material.card.MaterialCardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
