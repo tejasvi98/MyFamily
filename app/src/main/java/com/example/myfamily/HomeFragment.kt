@@ -3,6 +3,7 @@ package com.example.myfamily
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +11,15 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class HomeFragment : Fragment() {
 
+    private val listContacts : ArrayList<ContactModel> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,10 +74,24 @@ class HomeFragment : Fragment() {
 
         val recycler = requireView().findViewById<RecyclerView>(R.id.rv_members)
         recycler.layoutManager = LinearLayoutManager(requireContext())
-//        recycler.setHasFixedSize(true)
         recycler.adapter = adapter
 
-        val inviteAdapter = InviteAdapter(fetchContacts())
+//        Log.d("FetchContacts89", "FetchContacts start karne wale hai")
+
+//        Log.d("FetchContacts89", "FetchContacts start ho gaya hai ${listContacts.size}")
+        val inviteAdapter = InviteAdapter(listContacts)
+//        Log.d("FetchContacts89", "FetchContacts end ho gaya hai")
+
+        CoroutineScope(Dispatchers.IO).launch {
+//            Log.d("FetchContacts89", "FetchContacts Coroutines start")
+            listContacts.addAll(fetchContacts())
+            withContext(Dispatchers.Main){
+                inviteAdapter.notifyDataSetChanged()
+            }
+//            Log.d("FetchContacts89", "FetchContacts Coroutines end ${listContacts.size}")
+        }
+
+
 
         val inviteRecycler = requireView().findViewById<RecyclerView>(R.id.rv_invite)
         inviteRecycler.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
@@ -81,6 +101,8 @@ class HomeFragment : Fragment() {
 
     @SuppressLint("Range")
     private fun fetchContacts(): ArrayList<ContactModel> {
+
+//        Log.d("FetchContacts89", "start")
 
         val cr = requireActivity().contentResolver
         val cursor = cr.query(ContactsContract.Contacts.CONTENT_URI,null,null,null,null)
@@ -118,6 +140,7 @@ class HomeFragment : Fragment() {
             }
 
         }
+//        Log.d("FetchContacts89", "end")
         return listContacts
     }
 
