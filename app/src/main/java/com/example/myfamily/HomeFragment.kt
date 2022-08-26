@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
@@ -18,6 +17,8 @@ import kotlinx.coroutines.withContext
 
 
 class HomeFragment : Fragment() {
+
+    lateinit var inviteAdapter : InviteAdapter
 
     private val listContacts : ArrayList<ContactModel> = ArrayList()
 
@@ -36,6 +37,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//        Log.d("FetchContacts89", "onViewCreated: ")
 
         val listMembers = listOf<MemberModel>(
             MemberModel(
@@ -76,18 +79,20 @@ class HomeFragment : Fragment() {
         recycler.layoutManager = LinearLayoutManager(requireContext())
         recycler.adapter = adapter
 
+
+
 //        Log.d("FetchContacts89", "FetchContacts start karne wale hai")
 
 //        Log.d("FetchContacts89", "FetchContacts start ho gaya hai ${listContacts.size}")
-        val inviteAdapter = InviteAdapter(listContacts)
+        inviteAdapter = InviteAdapter(listContacts)
+        fetchDatabaseContacts()
 //        Log.d("FetchContacts89", "FetchContacts end ho gaya hai")
 
         CoroutineScope(Dispatchers.IO).launch {
 //            Log.d("FetchContacts89", "FetchContacts Coroutines start")
-            listContacts.addAll(fetchContacts())
-            withContext(Dispatchers.Main){
-                inviteAdapter.notifyDataSetChanged()
-            }
+
+            insertDatabaseContacts(fetchContacts())
+
 //            Log.d("FetchContacts89", "FetchContacts Coroutines end ${listContacts.size}")
         }
 
@@ -97,6 +102,24 @@ class HomeFragment : Fragment() {
         inviteRecycler.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
         inviteRecycler.adapter = inviteAdapter
 
+    }
+
+    private fun fetchDatabaseContacts(){
+        val database = MyFamilyDatabase.getDatabase(requireContext())
+        database.contactDao().getAllContacts().observe(viewLifecycleOwner){
+
+//            Log.d("FetchContacts89", "fetchDatabaseContacts: ")
+            
+            listContacts.clear()
+            listContacts.addAll(it)
+
+            inviteAdapter.notifyDataSetChanged()
+        }
+    }
+
+    private suspend fun insertDatabaseContacts(listContacts: ArrayList<ContactModel>) {
+        val database = MyFamilyDatabase.getDatabase(requireContext())
+        database.contactDao().insertAllContacts(listContacts)
     }
 
     @SuppressLint("Range")
