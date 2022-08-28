@@ -1,4 +1,4 @@
-package com.example.myfamily
+package com.example.myfamilyapp
 
 import android.content.Context
 import androidx.room.Database

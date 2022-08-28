@@ -1,4 +1,4 @@
-package com.example.myfamily
+package com.example.myfamilyapp
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

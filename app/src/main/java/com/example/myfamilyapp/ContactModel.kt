@@ -1,4 +1,4 @@
-package com.example.myfamily
+package com.example.myfamilyapp
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
