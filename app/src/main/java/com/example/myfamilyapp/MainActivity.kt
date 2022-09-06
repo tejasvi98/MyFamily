@@ -10,6 +10,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.myfamilyapp.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
@@ -22,15 +23,23 @@ class MainActivity : AppCompatActivity() {
     )
     val permissionCode = 78
 
+    lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        //using view binding
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         askForPermission()
 
-        val bottomBar = findViewById<BottomNavigationView>(R.id.bottom_bar)
+//        val bottomBar = findViewById<BottomNavigationView>(R.id.bottom_bar)
 
-        bottomBar.setOnItemSelectedListener {
+
+
+
+        binding.bottomBar.setOnItemSelectedListener { it ->
 
             when (it.itemId) {
                 R.id.itGuard -> {
@@ -50,7 +59,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        bottomBar.selectedItemId = R.id.itHome  // it makes home option in bottom navigation always selected
+        binding.bottomBar.selectedItemId = R.id.itHome  // it makes home option in bottom navigation always selected
     }
 
     private fun askForPermission() {

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -63,7 +64,12 @@ class LoginActivity : AppCompatActivity() {
                 if(task.isSuccessful){
                     //sign in success, start with main activity
                     Log.d("Fire89", "signInWithCredential: success ")
+
+                    SharedPref.putBoolean(PrefConstants.IS_USER_LOGGED_IN,true)
+
                     val user = auth.currentUser
+
+                    SharedPref.putString(PrefConstants.USERNAME,user?.displayName)
 
                     startActivity(Intent(this,MainActivity::class.java))
                     Log.d("Fire89", "firebaseAuthWithGoogle: ${user?.displayName}")

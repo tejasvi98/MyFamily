@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/MyFamilyApp/app/src/main/res/drawable/bg_gradient.xml" value="0.1725" />
         <entry key="..\:/MyFamilyApp/app/src/main/res/drawable/ic_login_svg.xml" value="0.1" />
+        <entry key="..\:/MyFamilyApp/app/src/main/res/drawable/splash_background.xml" value="0.1725" />
         <entry key="..\:/MyFamilyApp/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/MyFamilyApp/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Users/tejas/OneDrive/Documents/GitHub/MyFamily/app/src/main/res/drawable/ic_location.xml" value="0.2265" />
         <entry key="..\:/Users/tejas/OneDrive/Documents/GitHub/MyFamily/app/src/main/res/drawable/ic_login_svg.xml" value="0.1725" />
         <entry key="..\:/Users/tejas/OneDrive/Documents/GitHub/MyFamily/app/src/main/res/drawable/ic_profile.xml" value="0.2265" />

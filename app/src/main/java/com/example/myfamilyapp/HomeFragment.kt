@@ -1,14 +1,18 @@
 package com.example.myfamilyapp
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myfamilyapp.databinding.FragmentHomeBinding
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,12 +29,19 @@ class HomeFragment : Fragment() {
 
     }
 
+    lateinit var binding: FragmentHomeBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+
+
+        //using viewbinder
+        binding = FragmentHomeBinding.inflate(inflater,container,false)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -73,9 +84,12 @@ class HomeFragment : Fragment() {
 
         val adapter = MemberAdapter(listMembers)
 
-        val recycler = requireView().findViewById<RecyclerView>(R.id.rv_members)
-        recycler.layoutManager = LinearLayoutManager(requireContext())
-        recycler.adapter = adapter
+//        val recycler = requireView().findViewById<RecyclerView>(R.id.rv_members)
+//        recycler.layoutManager = LinearLayoutManager(requireContext())
+//        recycler.adapter = adapter
+
+        binding.rvMembers.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvMembers.adapter = adapter
 
 
 
@@ -96,9 +110,20 @@ class HomeFragment : Fragment() {
 
 
 
-        val inviteRecycler = requireView().findViewById<RecyclerView>(R.id.rv_invite)
-        inviteRecycler.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
-        inviteRecycler.adapter = inviteAdapter
+//        val inviteRecycler = requireView().findViewById<RecyclerView>(R.id.rv_invite)
+//        inviteRecycler.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+//        inviteRecycler.adapter = inviteAdapter
+
+        binding.rvInvite.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+        binding.rvInvite.adapter = inviteAdapter
+
+        val threeDots = requireView().findViewById<ImageView>(R.id.ivMenu)
+        threeDots.setOnClickListener {
+
+            SharedPref.putBoolean(PrefConstants.IS_USER_LOGGED_IN,false)
+            FirebaseAuth.getInstance().signOut()
+            startActivity(Intent(requireContext(),LoginActivity::class.java))
+        }
 
     }
 
