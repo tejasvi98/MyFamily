@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_bg" >
+    android:background="@color/grey_bg">
 
     <TextView
         android:id="@+id/tvSecurity"
@@ -118,6 +118,38 @@
         app:layout_constraintBottom_toBottomOf="@+id/mcvGreen_card"
         app:layout_constraintEnd_toEndOf="@+id/mcvGreen_card"
         app:layout_constraintTop_toTopOf="@+id/mcvGreen_card" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="@dimen/dimen_0"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_16"
+        android:hint="@string/enter_email_id_of_whom_you_want_to_invite"
+        app:layout_constraintBottom_toBottomOf="@id/bt_send_invite"
+        app:layout_constraintEnd_toStartOf="@id/bt_send_invite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mcvGreen_card" />
+
+    <Button
+        android:id="@+id/bt_send_invite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_16"
+        android:text="@string/send_invite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mcvGreen_card" />
+
+
+    <TextView
+        android:id="@+id/tv_your_invites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_16"
+        android:text="@string/your_invites"
+        android:textSize="@dimen/dimen_16_sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/etEmail"
+        app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

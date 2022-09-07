@@ -1,22 +1,22 @@
 package com.example.myfamilyapp
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myfamilyapp.databinding.ItemInviteBinding
 
 class InviteAdapter(
     private val listContacts : List<ContactModel>
 ) : RecyclerView.Adapter<InviteAdapter.ViewHolder>() {
 
-    class ViewHolder(private val item : View) : RecyclerView.ViewHolder(item){
-        val name = item.findViewById<TextView>(R.id.tv_contact_name)
+    class ViewHolder(private val item: ItemInviteBinding) : RecyclerView.ViewHolder(item.root){
+        val name = item.tvContactName
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val item = inflater.inflate(R.layout.item_invite,parent,false)
+        val item = ItemInviteBinding.inflate(inflater,parent,false)
 
         return ViewHolder(item)
     }

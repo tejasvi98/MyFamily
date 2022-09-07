@@ -18,4 +18,7 @@
     <string name="string_wifi">WiFi</string>
     <string name="continue_with_google">continue with google</string>
     <string name="web_client_id_auth">id</string>
+    <string name="enter_email_id_of_whom_you_want_to_invite">Enter email id of whom you want to invite</string>
+    <string name="send_invite">Send Invite</string>
+    <string name="your_invites">Your Invites:</string>
 </resources>
