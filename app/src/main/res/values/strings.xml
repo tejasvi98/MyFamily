@@ -21,4 +21,5 @@
     <string name="enter_email_id_of_whom_you_want_to_invite">Enter email id of whom you want to invite</string>
     <string name="send_invite">Send Invite</string>
     <string name="your_invites">Your Invites:</string>
+    <string name="accept">Accept</string>
 </resources>

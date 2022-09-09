@@ -1,6 +1,7 @@
 package com.example.myfamilyapp
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -21,12 +22,18 @@ import kotlinx.coroutines.launch
 class HomeFragment : Fragment() {
 
     lateinit var inviteAdapter : InviteAdapter
+    lateinit var mContext : Context
 
     private val listContacts : ArrayList<ContactModel> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        mContext = context
     }
 
     lateinit var binding: FragmentHomeBinding
@@ -88,7 +95,7 @@ class HomeFragment : Fragment() {
 //        recycler.layoutManager = LinearLayoutManager(requireContext())
 //        recycler.adapter = adapter
 
-        binding.rvMembers.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvMembers.layoutManager = LinearLayoutManager(mContext)
         binding.rvMembers.adapter = adapter
 
 
@@ -114,7 +121,7 @@ class HomeFragment : Fragment() {
 //        inviteRecycler.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
 //        inviteRecycler.adapter = inviteAdapter
 
-        binding.rvInvite.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+        binding.rvInvite.layoutManager = LinearLayoutManager(mContext,LinearLayoutManager.HORIZONTAL,false)
         binding.rvInvite.adapter = inviteAdapter
 
         val threeDots = requireView().findViewById<ImageView>(R.id.ivMenu)
@@ -122,13 +129,13 @@ class HomeFragment : Fragment() {
 
             SharedPref.putBoolean(PrefConstants.IS_USER_LOGGED_IN,false)
             FirebaseAuth.getInstance().signOut()
-            startActivity(Intent(requireContext(),LoginActivity::class.java))
+            startActivity(Intent(mContext,LoginActivity::class.java))
         }
 
     }
 
     private fun fetchDatabaseContacts(){
-        val database = MyFamilyDatabase.getDatabase(requireContext())
+        val database = MyFamilyDatabase.getDatabase(mContext)
         database.contactDao().getAllContacts().observe(viewLifecycleOwner){
 
 //            Log.d("FetchContacts89", "fetchDatabaseContacts: ")
@@ -141,7 +148,7 @@ class HomeFragment : Fragment() {
     }
 
     private suspend fun insertDatabaseContacts(listContacts: ArrayList<ContactModel>) {
-        val database = MyFamilyDatabase.getDatabase(requireContext())
+        val database = MyFamilyDatabase.getDatabase(mContext)
         database.contactDao().insertAllContacts(listContacts)
     }
 
